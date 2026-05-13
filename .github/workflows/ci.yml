@@ -15,6 +15,9 @@ on:
       - 'v*'
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   main:
     runs-on: ubuntu-latest
@@ -30,7 +33,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         id: buildx
@@ -49,7 +54,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx 1
         uses: ./
@@ -62,7 +69,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Stop docker
         run: |
@@ -83,14 +92,16 @@ jobs:
       -
         name: Dump context
         if: always()
-        uses: crazy-max/ghaction-dump-context@v2
+        uses: crazy-max/ghaction-dump-context@5355a8e5e6ac5a302e746a1c4b7747a0393863c8 # v2
 
   debug:
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Create Dockerfile
         run: |
@@ -100,7 +111,7 @@ jobs:
           EOL
       -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
       -
         name: Set up Docker Buildx
         uses: ./
@@ -108,7 +119,7 @@ jobs:
           buildkitd-flags: --debug
       -
         name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
           platforms: linux/amd64,linux/arm64,linux/ppc64le
@@ -118,7 +129,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
@@ -140,7 +153,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
@@ -163,7 +178,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
@@ -176,7 +193,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
@@ -209,7 +228,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Create context
         run: |
@@ -231,7 +252,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Create buildkitd conf
         run: |
@@ -254,7 +277,7 @@ jobs:
           buildkitd-config: /tmp/buildkitd.toml
       -
         name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
 
@@ -263,7 +286,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Create Dockerfile
         run: |
@@ -281,7 +306,7 @@ jobs:
               mirrors = ["mirror.gcr.io"]
       -
         name: Build
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: .
 
@@ -299,10 +324,12 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
         with:
           platforms: ${{ matrix.qemu-platforms }}
       -
@@ -328,7 +355,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
@@ -342,7 +371,7 @@ jobs:
           EOL
       -
         name: Build
-        uses: docker/build-push-action@master
+        uses: docker/build-push-action@789f68658055d3ca993799b232b5c46dfe3f114d # master
         with:
           context: .
 
@@ -351,7 +380,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Uninstall docker cli
         run: |
@@ -379,7 +410,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Uninstall docker cli
         run: |
@@ -401,7 +434,7 @@ jobs:
           EOL
       -
         name: Build
-        uses: docker/build-push-action@master
+        uses: docker/build-push-action@789f68658055d3ca993799b232b5c46dfe3f114d # master
         with:
           context: .
 
@@ -410,7 +443,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Uninstall docker cli
         run: |
@@ -440,7 +475,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Create dummy contexts
         run: |
@@ -469,10 +506,12 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
       -
         name: Set up Docker Buildx
         uses: ./
@@ -484,7 +523,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Create Docker context
         run: |
@@ -507,7 +548,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
@@ -525,7 +568,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Install k3s
         uses: crazy-max/.github/.github/actions/install-k3s@605d30d5ae97f6680578ace4b56645af79343e60
@@ -560,7 +605,7 @@ jobs:
           EOL
       -
         name: Build
-        uses: docker/build-push-action@master
+        uses: docker/build-push-action@789f68658055d3ca993799b232b5c46dfe3f114d # master
         with:
           context: .
 
@@ -575,7 +620,9 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
       -
         name: Set up Docker Buildx
         uses: ./
